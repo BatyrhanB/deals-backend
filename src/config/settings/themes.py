@@ -34,7 +34,6 @@ JAZZMIN_SETTINGS = {
     "custom_js": None,
     "show_ui_builder": True,
     "changeform_format": "vertical_tabs",
-    #"changeform_format_overrides": {"app.model": "horizontal_tabs"},
 }
 
 JAZZMIN_UI_TWEAKS = {

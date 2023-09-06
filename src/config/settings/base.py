@@ -1,5 +1,4 @@
 # Imports
-from datetime import timedelta
 import os
 from pathlib import Path
 from decouple import config
@@ -15,7 +14,7 @@ ADMIN_URL = config("ADMIN_URL")
 PRODUCTION = config("PRODUCTION", default=False, cast=bool)
 
 LOCAL_APPS = [
-    "common.apps.CommonConfig", 
+    "common.apps.CommonConfig",
     "deals.apps.DealsConfig",
 ]
 
@@ -125,15 +124,15 @@ AUTH_PASSWORD_VALIDATORS = [
     # },
 ]
 
-from .cors import *
-from .themes import *
+from config.settings.cors import * # noqa
+from config.settings.themes import * # noqa
 
 if not PRODUCTION:
-    from .dev import *
+    from config.settings.dev import * # noqa
 else:
-    from .production import *
+    from config.settings.production import * # noqa
 
 
-if DEBUG:
+if DEBUG: # noqa
     INTERNAL_IPS = ["127.0.0.1"]
     MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]

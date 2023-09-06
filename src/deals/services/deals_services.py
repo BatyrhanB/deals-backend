@@ -80,7 +80,9 @@ class DealsService(object):
             Tuple[bool, str]: A tuple indicating the success of the operation and an error message
         """
         try:
-            cls._clear_existing_data()  # В требованиях в пункте 2 не очень понятно, что имелось в виду, поэтому сделал так чтобы все удалялось
+            # В требованиях в пункте 2 не очень понятно, что имелось в виду, поэтому сделал так чтобы все удалялось
+            cls._clear_existing_data()
+
             cls._validate_csv_file(uploaded_file)
             cls._process_csv_data(uploaded_file)
             return True, ""

@@ -16,5 +16,5 @@ class Deals(BaseModel):
     class Meta:
         db_table = "deals__deals"
         verbose_name = "Deal"
-        verbose_name_plural = "Deals" 
+        verbose_name_plural = "Deals"
         ordering = ("-created_at",)
