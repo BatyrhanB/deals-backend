@@ -1,7 +1,7 @@
 from rest_framework import status, response, generics, parsers
 
-from deals.serializers.deals_serializer import FileUploadDealsSerializer
-from deals.services.deals_services import DealsService
+from deals.serializers.deals_serializer import FileUploadDealsSerializer, CustomerSerializer
+from deals.services.deals_services import DealsService, CustomerService
 
 
 class FileUploadView(generics.GenericAPIView):
@@ -26,3 +26,22 @@ class FileUploadView(generics.GenericAPIView):
                 return response.Response({"error": error_message}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return response.Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TopCustomersView(generics.GenericAPIView):
+    """
+    Returns the 5 customers who spent the highest amount during the entire period.
+    Args:
+        request: HTTP request object.
+    Returns:
+        Response: HTTP response indicating the success or fail error.
+    """
+
+    def get(self, request, *args, **kwargs) -> response.Response:
+        try:
+            customer_data = CustomerService.get_top_customers()
+        except Exception as e:
+            return response.Response({"error": str(e)}, status=500)
+
+        serializer = CustomerSerializer(customer_data, many=True)
+        return response.Response({"response": serializer.data})

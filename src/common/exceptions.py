@@ -8,6 +8,7 @@ class ObjectNotFoundException(APIException):
 class UniqueObjectException(APIException):
     status_code = 400
 
+
 class NothingToDoException(APIException):
     status_code = 400
 
@@ -26,6 +27,7 @@ class RequiredFieldException(APIException):
 
 class RequiredQueryException(APIException):
     status_code = 400
+
 
 class IncorrectFileFormat(APIException):
     status_code = 400
