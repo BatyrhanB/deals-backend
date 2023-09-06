@@ -16,6 +16,7 @@ PRODUCTION = config("PRODUCTION", default=False, cast=bool)
 
 LOCAL_APPS = [
     "common.apps.CommonConfig", 
+    "deals.apps.DealsConfig",
 ]
 
 THIRD_PARTY_APPS = [

@@ -11,17 +11,6 @@ class UniqueObjectException(APIException):
 class NothingToDoException(APIException):
     status_code = 400
 
-class ObjectDeletedException(APIException):
-    status_code = 400
-
-
-class TypeErrorException(APIException):
-    status_code = 400
-
-
-class IncorrectPasswordException(APIException):
-    status_code = 400
-
 
 class AlreadyExist(APIException):
     status_code = 400
@@ -37,3 +26,7 @@ class RequiredFieldException(APIException):
 
 class RequiredQueryException(APIException):
     status_code = 400
+
+class IncorrectFileFormat(APIException):
+    status_code = 400
+    message = "Only csv files can be uploaded"
