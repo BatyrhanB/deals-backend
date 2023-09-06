@@ -1,0 +1,67 @@
+version: '3.9'
+
+services:
+  deals_back: 
+    container_name: deals_back
+    tty: true
+    build: ..
+    volumes:
+      - ../../deals-backend:/opt/services/deals-backend/
+      - ../back_static:/opt/services/deals-backend/back_static/
+      - ../back_media:/opt/services/deals-backend/back_media/
+    entrypoint: "sh /opt/services/deals-backend/scripts/wsgi_server.sh"
+    ports:
+      - "8000:8000"
+    networks:
+      - main-network
+      - nginx-network
+      - db-network
+
+  db:
+    image: postgres:14-alpine
+    container_name: deals_db
+    restart: unless-stopped
+    volumes:
+      - ../storage:/var/lib/postgresql/data
+    networks:
+      - db-network
+    env_file:
+      - ../src/.env
+
+  #redis:
+  #  restart: always
+  #  image: redis:alpine
+  #  container_name: deals_redis
+  #  logging:
+  #    driver: json-file
+  #    options:
+  #      max-size: "10m"
+  #      max-file: "5"
+  #  ports:  
+  #  - "6379:6379"
+  #  networks:
+  #    - main-network
+  #    - nginx-network
+
+  nginx:
+    image: nginx:1.13
+    container_name: deals_nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ../config/nginx/conf.d.dev:/etc/nginx/conf.d
+      - ../back_static:/opt/services/deals-backend/back_static/
+      - ../back_media:/opt/services/deals-backend/back_media/
+    networks:
+      - nginx-network
+      - main-network
+
+networks:
+  nginx-network:
+    driver: bridge
+  db-network:
+    driver: bridge
+  main-network:
+    driver: bridge
+
