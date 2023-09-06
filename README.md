@@ -26,3 +26,15 @@ chmod +x local_start.sh
 cp .env.Example src/.env
 ```
 Эта команда копирует файл .env.example в директорию src и одновременно переименовывает его в .env. Пожалуйста, убедитесь, что вы выполняете эту команду из корневой директории вашего проекта.
+
+## Эндпоинты
+
+API для сохранение данных с csv в БД
+ - Method: POST
+
+ - URL: http://0.0.0.0:8000/api/v1/deals/upload_file/
+
+API для получение топ 5 заказчиков
+ - Method: GET
+
+ - URL: http://0.0.0.0:8000/api/v1/deals/top_customers/
